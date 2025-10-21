@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello Kitty</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+    body {
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .container {
+      width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hello-kitty {
+      position: relative;
+      width: 210px;
+      height: 180px;
+      margin-bottom: 30px;
+      z-index: 2;
+      transition: 
+        transform 1.2s cubic-bezier(.7,-0.01,.3,1.01),
+        top 1.2s cubic-bezier(.7,-0.01,.3,1.01);
+      will-change: transform, top;
+      background: none;
+    }
+    .hello-kitty.shrink-up {
+      transform: scale(0.45) translateY(-120px);
+    }
+    /* Head */
+    .kitty-head {
+      position: absolute;
+      width: 170px;
+      height: 130px;
+      left: 20px;
+      top: 30px;
+      background: #fff;
+      border: 4px solid #222;
+      border-radius: 50% 50% 48% 48% / 55% 55% 45% 45%;
+      z-index: 2;
+    }
+    /* Ears */
+    .kitty-ear {
+      position: absolute;
+      width: 54px;
+      height: 60px;
+      background: #fff;
+      border: 4px solid #222;
+      border-bottom: none;
+      z-index: 1;
+    }
+    .kitty-ear.left {
+      left: 0;
+      top: 0;
+      border-radius: 60% 80% 0 0 / 100% 100% 0 0;
+      transform: rotate(-18deg);
+    }
+    .kitty-ear.right {
+      right: 0;
+      top: 0;
+      border-radius: 80% 60% 0 0 / 100% 100% 0 0;
+      transform: rotate(18deg);
+    }
+    /* Bow */
+    .kitty-bow-center {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 22px;
+      height: 22px;
+      background: #ff3366;
+      border: 3px solid #222;
+      border-radius: 50%;
+      z-index: 3;
+    }
+    .kitty-bow-left, .kitty-bow-right {
+      position: absolute;
+      top: 10px;
+      width: 28px;
+      height: 28px;
+      background: #ff6699;
+      border: 3px solid #222;
+      border-radius: 50% 60% 50% 60% / 60% 50% 60% 50%;
+      z-index: 2;
+    }
+    .kitty-bow-left {
+      right: 30px;
+      transform: rotate(-18deg);
+    }
+    .kitty-bow-right {
+      right: 0px;
+      transform: rotate(18deg);
+    }
+    /* Eyes */
+    .kitty-eye {
+      position: absolute;
+      top: 80px;
+      width: 16px;
+      height: 22px;
+      background: #222;
+      border-radius: 50%;
+      z-index: 4;
+    }
+    .kitty-eye.left { left: 60px; }
+    .kitty-eye.right { left: 120px; }
+    /* Nose */
+    .kitty-nose {
+      position: absolute;
+      top: 100px;
+      left: 95px;
+      width: 20px;
+      height: 13px;
+      background: #ffcc00;
+      border-radius: 50%;
+      border: 2px solid #222;
+      z-index: 4;
+    }
+    /* Whiskers */
+    .kitty-whisker {
+      position: absolute;
+      width: 40px;
+      height: 2.5px;
+      background: #222;
+      border-radius: 2px;
+      z-index: 4;
+    }
+    .kitty-whisker.l1 { left: 18px; top: 108px; transform: rotate(-12deg);}
+    .kitty-whisker.l2 { left: 12px; top: 120px; }
+    .kitty-whisker.l3 { left: 18px; top: 132px; transform: rotate(12deg);}
+    .kitty-whisker.r1 { left: 132px; top: 108px; transform: rotate(12deg);}
+    .kitty-whisker.r2 { left: 138px; top: 120px; }
+    .kitty-whisker.r3 { left: 132px; top: 132px; transform: rotate(-12deg);}
+    /* Highlight on head */
+    .kitty-highlight {
+      position: absolute;
+      left: 60px;
+      top: 50px;
+      width: 30px;
+      height: 18px;
+      background: #fff8;
+      border-radius: 50%;
+      z-index: 5;
+      filter: blur(1.5px);
+    }
+    .show-message-btn {
+      display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+      background: #ff3366;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.2rem;
+      font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+      font-weight: bold;
+      padding: 12px 38px;
+      box-shadow: 0 4px 24px #ff336633;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+    .show-message-btn:active {
+      background: #d91a4d;
+      transform: scale(0.97);
+    }
+    .msg {
+      opacity: 0;
+      max-width: 95vw;
+      margin: 0 auto;
+      margin-top: 24px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px #ff336633;
+      padding: 18px 10vw;
+      color: #232946;
+      font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+      font-size: 1.1rem;
+      line-height: 2.1;
+      text-align: right;
+      direction: rtl;
+      border: 2px solid #ffb6d5;
+      transition: opacity 0.8s;
+      z-index: 1;
+      position: relative;
+      word-break: break-word;
+      pointer-events: none;
+    }
+    .msg.visible {
+      opacity: 1;
+      animation: fadeInUp 1.2s;
+      pointer-events: auto;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 600px) {
+      .hello-kitty {
+        width: 130px;
+        height: 100px;
+      }
+      .kitty-head {
+        width: 105px;
+        height: 70px;
+        left: 12px;
+        top: 18px;
+      }
+      .kitty-ear {
+        width: 32px;
+        height: 36px;
+      }
+      .kitty-eye {
+        width: 10px;
+        height: 13px;
+        top: 48px;
+      }
+      .kitty-eye.left { left: 36px; }
+      .kitty-eye.right { left: 72px; }
+      .kitty-nose {
+        width: 12px;
+        height: 8px;
+        left: 57px;
+        top: 60px;
+      }
+      .kitty-whisker {
+        width: 22px;
+        height: 1.5px;
+      }
+      .kitty-whisker.l1 { left: 10px; top: 65px;}
+      .kitty-whisker.l2 { left: 7px; top: 72px;}
+      .kitty-whisker.l3 { left: 10px; top: 79px;}
+      .kitty-whisker.r1 { left: 78px; top: 65px;}
+      .kitty-whisker.r2 { left: 81px; top: 72px;}
+      .kitty-whisker.r3 { left: 78px; top: 79px;}
+      .kitty-bow-center {
+        width: 13px;
+        height: 13px;
+        right: 10px;
+        top: 8px;
+      }
+      .kitty-bow-left, .kitty-bow-right {
+        width: 16px;
+        height: 16px;
+        top: 4px;
+      }
+      .kitty-bow-left { right: 17px; }
+      .kitty-bow-right { right: 0px; }
+      .kitty-highlight {
+        left: 36px;
+        top: 28px;
+        width: 18px;
+        height: 8px;
+      }
+      .msg {
+        font-size: 0.98rem;
+        padding: 12px 4vw;
+      }
+      .show-message-btn {
+        font-size: 1rem;
+        padding: 10px 18vw;
+      }
+    }
+  </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="hello-kitty" id="kitty">
+                <div class="kitty-ear left"></div>
+                <div class="kitty-ear right"></div>
+                <div class="kitty-head"></div>
+                <div class="kitty-bow-center"></div>
+                <div class="kitty-bow-left"></div>
+                <div class="kitty-bow-right"></div>
+                <div class="kitty-eye left"></div>
+                <div class="kitty-eye right"></div>
+                <div class="kitty-nose"></div>
+                <div class="kitty-whisker l1"></div>
+                <div class="kitty-whisker l2"></div>
+                <div class="kitty-whisker l3"></div>
+                <div class="kitty-whisker r1"></div>
+                <div class="kitty-whisker r2"></div>
+                <div class="kitty-whisker r3"></div>
+                <div class="kitty-highlight"></div>
+            </div>
+            <button class="show-message-btn" id="showMsgBtn">رسالة</button>
+            <div class="msg" id="msg">
+                <p>
+                    BNTY 3ID MILAD S3ID TNBGHIK ZIN DEYLI 39BA L 100 ANS BAX
+                    MATMANITY O FRHA O GA3E DKXI LIKTMNY BNTY AHOWA 3ID MILD
+                    KHOR ME3K TANI WDH BNTY MTSWERIX 9ADAX ANA FRHAN WALH HTA
+                    FRHAN BNTY TNBGHIIIIK ZIN DEYLI ANA DIMA ME3K BNTY GHADI
+                    NB9A DIMN M3K NCHA2ALH L3AM JAY MGHADIX N3WD BHAL HAD GHLT
+                    GHADI NB9A N9D LIK CODE MN DABA HIT KTSTHLI KOLXI BNTY 😍
+                    <br>
+                    BNTY HAD NCHA2ALH IKON HAD L3AM BNTY 3AM ZEWIN OTFRHI FIH O
+                    DHKI BNTY TNBGHIIIIK ANA MAXI ME3K O MAWALF LIKOLXI MWALFO
+                    MSJ IWASLK ME3A 12 WALKIN HDXI MKYJIX ME3A AMIRA DEYLI AMIRA
+                    DEYLI KTSTHL XIHAJA DKXI 3ELAX BAX THSI BHAL ILA ANA ME3K
+                    BNTY TNBGHIIIIK ZIN DEYLI KNMOOOT 3ELIK BNTY KNHM9 3ELIK
+                    JAMAL DEYLK DRAFAT KOLK BNTY ZEWINA KNHM9 3ELIK BNTY💕
+                    <br>
+                    BNTY ANA DIMA M3K BNTY GHADI NB9A DIMN N3ETANI BIK BNTY BNTY
+                    NT9RNINIX BHTA WHD O MT3MLINIX BHALHOM BNTY ANA MGHADIX NDIR
+                    DKXI LIDARO HOMA OLA KIF TSRFO ME3K GHADI NTSARAF ME3K ANA
+                    DIMN GHADI N3ETNI BIK O NDIHA FIK HIT NTY AGHLA HAJA 3NDI
+                    BNTY KNMOOOT 3ELIK KBIDA DEYLI TNBGHIIIIIK ZIN DEYLI ANA
+                    DIMN ME3K BNTY HTAJITY AYA HAJA AJI 3NDI MTKHBI 3ELIYA WALO
+                    BAX MNT9L9X MNK ANA MGHADIX NKHBI 3ELIK WALO HAD L3AM GHADI
+                    NHAWAL MN JHI KML N3ETNI BIK KTR O NDIHA FIK KTR OHTA NTY
+                    BNTY HTAMI KTR O DIHA KTR BAX IKON TWAZON BNTY KNOOOOOOOOT
+                    3ELIK BNTY ANA HADXI KNKB WALH ILA LYOUMA 20/09/2025 DABA
+                    18:51 DABA NTY F LES COURS HDXI LITNDIR ANA FHYATY BNTY
+                    KNDEWI ME3K ILA MKNTYX KNDIR XIHAJA BHAL HAKA OLA KNTFRJ
+                    DABA NTY FAX GHADI TKONI KNT9RY M3RFTX KIFAX GHADI IKON DAK
+                    LIL WALKIN LI3RF HIYA GHADI TKONI ME3AYA INCHA2ALH O GHADI
+                    TKONI KT9RY HDXI TNBGHIIIIIK KBIDA DEYLI😘
+                    <br>
+                    BNTY ANA TNGHIR BAZAAAAF MKNBGHIX XIHAJA DEYLI TKON MOTAHA
+                    LJMO3E KNGHI HAJA DEYLI NKHF 3ELIHA NHTM FIHA NDIHA FIHA O
+                    NKHBIHA BNTY KNMOOOOT 3ELIK ZIN DEYLI KNMOOOOT 3ELIK BNTY
+                    💖💖
+                    <br>
+                    BNTY ANA KNMOOOT 3ELIK BNTY BNTY ANA MAGHADIX NKHALIK BNTY
+                    GHADI NB9A DIMN ME3K BNTY 3MRNI GHADI NKHONK OLA NKHLIK OLA
+                    HTA HAJA BNTY BGHITK TSWELI RASK WAX 3MRK KHLITK FXIHJAA OLA
+                    KHEWIT BIK OLA GLT LIK XIHJA O KNT GHAID KNKDB 3ELIK FIHA
+                    DIMN KTJI 3NDI MKNGOLIKX LA KTGOLI LIYA XIHJA KNGOLK HIYA
+                    LWELA BNTY KNBGHIK
+                    <br>
+                    BNTY SMHI LIYA SMHI LIYA BNTY 3ELA DKXI KML LIDR LIK BNTY O
+                    M3JBK RAH MXI DRTHA BL3NI RAH KNKON KHRJ STITA3A DEYLI SMHI
+                    LIYA BNTY KNMOOOT 3ELIK
+                    GHADI NDIR GA3E LIFJHDI BAX N3MLK BNTY AHSN O3AMALA🥺
+                    RAH ANA 3NDI GHIR NTY BOHDK BNTY BGHITK TFHMI HAD JOMLA MZYN
+                    FAX XIHD KYNKON 3NDO GHIR XKHS WHD FHYTO HOWA KY3ENI LIH
+                    KOLXI
+                    <br>
+                    BNTYYYYY KNBGHIIIIK ZIN DEYLI BNTY NCHA2ALH AHD L3AM NDAWZOH
+                    HSN MN LIFAT O NKONO 9RB LB3EDIYTNA KTR O NTFHMO KTR BNTY
+                    KNBGHIIIIK
+                </p>
+            </div>
+        </div>
+        <script>
+        // في البداية: إظهار كيتي فقط وإخفاء الرسالة
+        const kitty = document.getElementById('kitty');
+        const msg = document.getElementById('msg');
+        const btn = document.getElementById('showMsgBtn');
+        msg.style.display = "none";
+
+        btn.onclick = function() {
+          // صغر كيتي واظهر الرسالة
+          kitty.classList.add('shrink-up');
+          btn.style.display = "none";
+          setTimeout(() => {
+            msg.style.display = "block";
+            setTimeout(() => {
+              msg.classList.add('visible');
+            }, 50);
+          }, 1200);
+        };
+      </script>
+    </body>
+</html>

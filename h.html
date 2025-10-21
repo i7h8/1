@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>BNTY SGHIRA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap');
+
+        body {
+            background: linear-gradient(135deg, #d9a7c7 0%, #fffcdc 100%);
+            font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+            color: #444;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* نجوم صغيرة كثيرة ✨ */
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 4s infinite alternate, floatStar 15s linear infinite;
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.3; transform: scale(0.7); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes floatStar {
+            0%   { transform: translateY(0); opacity: 1; }
+            90%  { opacity: 1; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        /* قلب متحرك */
+        .floating-heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* شريط تقدم */
+        .progress-bar {
+            width: 80%;
+            max-width: 600px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ff99ac, #a18cd1);
+            border-radius: 10px;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        .page-indicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff99ac, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* فقاعات */
+        .bubble {
+            max-width: 600px;
+            line-height: 1.8;
+            font-size: 1.15rem;
+            background: #fdf0f5;
+            color: #333;
+            padding: 24px 30px;
+            border-radius: 40px 40px 40px 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            margin: 18px;
+            text-align: center;
+            font-weight: bold;
+            border: 2px solid #fbcfe8;
+            position: relative;
+            z-index: 2;
+        }
+        .bubble:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(255,192,203,0.35);
+        }
+        .bubble-title {
+            font-size: 1.6rem;
+            background: linear-gradient(90deg, #ff99ac, #a18cd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .bubble-long {
+            text-align: right;
+            direction: rtl;
+            line-height: 1.9;
+            padding: 30px;
+        }
+
+        /* أزرار التنقل */
+        .buttons-container {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            position: fixed;
+            bottom: 30px;
+            left: 0;
+            z-index: 3;
+        }
+        .side-btn {
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .side-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(238,156,167,0.5);
+        }
+        .side-btn a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .bubble {
+                font-size: 1rem;
+                padding: 16px 20px;
+                margin: 12px;
+            }
+            .bubble-long {
+                padding: 20px;
+            }
+            .buttons-container {
+                bottom: 15px;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .side-btn {
+                width: 80%;
+            }
+            .progress-bar {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التقدم -->
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+    <div class="page-indicator">📖 الصفحة 1 من 8</div>
+
+    <!-- فقاعات -->
+    <div class="bubble">
+        <div class="bubble-title">🎂 HAPPY BIRTHDAY BNTY 🎉</div>
+        صغيرتي 💖
+    </div>
+
+    <div class="bubble bubble-long">
+        BNTY. 3id milad s3id bntyyy mtkhlyx bli daba bnty kmlan 3am o d9i9a
+        tnbghiiiik bntyyy knmoooot 3elik nty hiya kolxi daba ana bghi ndewi
+        dkxi 3elax ghadi ndir wax zir idwzk mn sfha lsfha hit ghadi ndewi
+        3ela bazaaaf mawadi3e tnbghik bnty...
+    </div>
+
+    <div class="bubble">
+        <div class="bubble-title">💖 3ID MILAD BNTY 💖</div>
+    </div>
+
+    <!-- قلوب متحركة -->
+    <div class="floating-heart" style="top:10%; left:5%;">💖</div>
+    <div class="floating-heart" style="top:20%; left:90%; animation-delay: 1s;">🎂</div>
+    <div class="floating-heart" style="top:80%; left:10%; animation-delay: 2s;">🎉</div>
+    <div class="floating-heart" style="top:70%; left:85%; animation-delay: 3s;">💝</div>
+
+    <!-- الأزرار -->
+    <div class="buttons-container">
+        <button class="side-btn"><a href="index.html">⬅️ الصفحة السابقة</a></button>
+        <button class="side-btn"><a href="0h.html">➡️ الصفحة القادمة</a></button>
+    </div>
+
+    <script>
+        // رقم الصفحة الحالية
+        const currentPage = 1; // 🔹 غير هذا الرقم من 1 إلى 8
+        const totalPages = 8;
+
+        // تحديث شريط التقدم
+        const progress = document.querySelector('.progress');
+        const percent = (currentPage / totalPages) * 100;
+        progress.style.width = percent + "%";
+
+        // توليد النجوم
+        function createStars() {
+            const starsCount = 30;
+            const body = document.body;
+
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                const size = Math.random() * 3 + 1;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${left}%`;
+                star.style.bottom = `-10px`; 
+                star.style.animationDelay = `${delay}s`;
+
+                body.appendChild(star);
+            }
+        }
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
