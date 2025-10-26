@@ -2,7 +2,7 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Kitty - رسم محسّن</title>
+    <title>Hello Kitty</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -102,6 +102,25 @@
             padding: 20px;
             position: relative;
             z-index: 10;
+            max-height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        /* تحسين شريط التمرير */
+        .container::-webkit-scrollbar {
+            width: 10px;
+        }
+        .container::-webkit-scrollbar-track {
+            background: rgba(255, 182, 213, 0.2);
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff6fa5, #ff3b7c);
+            border-radius: 10px;
+        }
+        .container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff3b7c, #d91a4d);
         }
         
         .hello-kitty-svg {
@@ -170,12 +189,14 @@
         .msg {
             display: none;
             opacity: 0;
-            max-width: 90vw;
+            max-width: 800px;
+            width: 90%;
             margin-top: 40px;
+            margin-bottom: 60px;
             background: #fff;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(255, 59, 124, 0.25), 0 0 0 5px #ffb6d5;
-            padding: 25px 8vw;
+            padding: 30px 50px;
             color: #232946;
             line-height: 2.2;
             direction: ltr;
@@ -183,6 +204,32 @@
             unicode-bidi: plaintext;
             transition: opacity 0.8s;
             word-break: break-word;
+            font-size: 1.05rem;
+            max-height: 60vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        /* تحسين شريط تمرير الرسالة */
+        .msg::-webkit-scrollbar {
+            width: 8px;
+        }
+        .msg::-webkit-scrollbar-track {
+            background: rgba(255, 182, 213, 0.15);
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .msg::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ffb6d5, #ff6fa5);
+            border-radius: 10px;
+        }
+        .msg::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff6fa5, #ff3b7c);
+        }
+        
+        .msg p {
+            margin: 0;
+            padding: 0;
         }
         .msg.visible {
             opacity: 1;
