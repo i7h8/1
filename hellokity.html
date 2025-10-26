@@ -2,252 +2,245 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>Hello Kitty Enhanced</title>
+    <title>Hello Kitty - رسم محسّن</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Hello Kitty - Enhanced Classic Style */
-body {
-    background: #fdfdfd; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    overflow-x: hidden;
-    font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
-}
-.container {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-.hello-kitty {
-    position: relative;
-    width: 200px; /* تعديل الحجم */
-    height: 190px;
-    margin-bottom: 25px;
-    z-index: 2;
-    transition: transform 1.2s cubic-bezier(.7,-0.01,.3,1.01), top 1.2s cubic-bezier(.7,-0.01,.3,1.01);
-    will-change: transform, top;
-}
-.hello-kitty.shrink-up {
-    transform: scale(0.45) translateY(-120px);
-}
-
-/* رأس هيلو كيتي - تحسين النسب */
-.kitty-head {
-    position: absolute;
-    width: 175px; /* عرض أدق */
-    height: 150px; /* ارتفاع أكبر قليلاً */
-    left: 10px;
-    top: 25px;
-    background: #fff;
-    border: 3.5px solid #000; /* سمك متوسط للخطوط */
-    border-radius: 48% 48% 48% 48% / 55% 55% 45% 45%; /* شكل أكثر استدارة */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* ظل ناعم جدًا */
-    z-index: 2;
-}
-
-/* الأذنان - زاوية أدق */
-.kitty-ear {
-    position: absolute;
-    width: 50px;
-    height: 55px;
-    background: #fff;
-    border: 3.5px solid #000;
-    border-bottom: none;
-    z-index: 1;
-}
-.kitty-ear.left {
-    left: 4px;
-    top: -4px;
-    border-radius: 60% 100% 0 0 / 100% 100% 0 0;
-    transform: rotate(-18deg); /* زاوية أكثر انحدارًا */
-}
-.kitty-ear.right {
-    right: 4px;
-    top: -4px;
-    border-radius: 100% 60% 0 0 / 100% 100% 0 0;
-    transform: rotate(18deg); /* زاوية أكثر انحدارًا */
-}
-
-/* القوس - ألوان زاهية وخطوط أدق */
-.kitty-bow-center {
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    width: 22px;
-    height: 22px;
-    background: #ff3b7c; 
-    border: 2px solid #000; /* حدود أرق للقوس */
-    border-radius: 50%;
-    z-index: 4;
-}
-.kitty-bow-left, .kitty-bow-right {
-    position: absolute;
-    top: 5px;
-    width: 32px;
-    height: 32px;
-    background: #ff6fa5; 
-    border: 2px solid #000;
-    border-radius: 50%;
-    z-index: 3;
-}
-.kitty-bow-left {
-    right: 36px;
-    transform: rotate(-20deg); 
-}
-.kitty-bow-right {
-    right: -2px;
-    transform: rotate(20deg); 
-}
-
-/* العيون - موضع ونسبة أفضل */
-.kitty-eye {
-    position: absolute;
-    top: 75px;
-    width: 14px;
-    height: 19px;
-    background: #111;
-    border-radius: 50% / 60%;
-    z-index: 4;
-}
-.kitty-eye.left { left: 55px; } 
-.kitty-eye.right { left: 118px; } 
-
-/* الأنف - موضع ونسبة أفضل */
-.kitty-nose {
-    position: absolute;
-    top: 98px;
-    left: 88px;
-    width: 18px;
-    height: 12px;
-    background: #ffc900; 
-    border-radius: 50%;
-    border: 2px solid #000;
-    z-index: 4;
-}
-
-/* الشوارب - موضع وخطوط متناسقة */
-.kitty-whisker {
-    position: absolute;
-    width: 40px; 
-    height: 2px; /* أرق قليلاً */
-    background: #000;
-    border-radius: 2px;
-    z-index: 4;
-}
-.kitty-whisker.l1 { left: 10px; top: 102px; transform: rotate(-10deg);}
-.kitty-whisker.l2 { left: 8px; top: 116px; }
-.kitty-whisker.l3 { left: 10px; top: 130px; transform: rotate(10deg);}
-.kitty-whisker.r1 { left: 132px; top: 102px; transform: rotate(10deg);}
-.kitty-whisker.r2 { left: 134px; top: 116px; }
-.kitty-whisker.r3 { left: 132px; top: 130px; transform: rotate(-10deg);}
-
-/* لمعان بسيط على الرأس (لإبراز البياض) */
-.kitty-highlight {
-    display: none; 
-}
-
-/* زر و رسالة */
-.show-message-btn {
-    display: block;
-    margin: 0 auto;
-    margin-top: 25px;
-    background: #ff3b7c;
-    color: #fff;
-    border: 3px solid #000;
-    border-radius: 18px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding: 12px 38px;
-    box-shadow: 0 5px 0 #d91a4d;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    z-index: 2;
-    letter-spacing: 1px;
-}
-.show-message-btn:active {
-    background: #d91a4d;
-    transform: translateY(4px); 
-    box-shadow: 0 1px 0 #d91a4d;
-}
-.msg {
-    display: none;
-    opacity: 0;
-    max-width: 95vw;
-    margin: 0 auto;
-    margin-top: 35px;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 6px 12px rgba(255, 59, 124, 0.2), 0 0 0 4px #ffb6d5;
-    padding: 18px 10vw;
-    color: #232946;
-    line-height: 2.1;
-    direction: ltr;
-    text-align: left;
-    unicode-bidi: plaintext;
-    transition: opacity 0.8s;
-    z-index: 1;
-    position: relative;
-    word-break: break-word;
-    pointer-events: none;
-}
-.msg.visible {
-    opacity: 1;
-    animation: fadeInUp 1.2s;
-    pointer-events: auto;
-}
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px);}
-    to { opacity: 1; transform: translateY(0);}
-}
-
-/* للهاتف */
-@media (max-width: 600px) {
-    .hello-kitty { width: 120px; height: 110px; }
-    .kitty-head { width: 100px; height: 80px; left: 8px; top: 16px; border: 3px solid #000;}
-    .kitty-ear { width: 30px; height: 35px; border: 3px solid #000; }
-    .kitty-eye { width: 9px; height: 12px; top: 44px; }
-    .kitty-eye.left { left: 30px; }
-    .kitty-eye.right { left: 68px; }
-    .kitty-nose { width: 10px; height: 7px; left: 49px; top: 58px; border: 1.5px solid #000; }
-    .kitty-whisker { width: 22px; height: 1.5px; }
-    .kitty-bow-center { width: 12px; height: 12px; right: 8px; top: 5px; border: 2px solid #000; }
-    .kitty-bow-left, .kitty-bow-right { width: 16px; height: 16px; top: 2px; border: 2px solid #000; }
-    .kitty-bow-left { right: 30px; }
-    .msg { font-size: 0.95rem; padding: 10px 4vw; }
-    .show-message-btn { border: 2px solid #000; }
-}
-
+        body {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* القلوب الطافية */
+        .floating-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0;
+            animation: floatUp 8s ease-in infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+                transform: translateY(90vh) rotate(45deg) scale(1);
+            }
+            90% {
+                opacity: 0.8;
+                transform: translateY(-10vh) rotate(180deg) scale(1);
+            }
+            100% {
+                transform: translateY(-20vh) rotate(220deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        /* الزهور المتساقطة */
+        .falling-flower {
+            position: absolute;
+            font-size: 25px;
+            animation: fall 10s linear infinite;
+            pointer-events: none;
+            opacity: 0;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-20vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.9;
+            }
+            90% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* نجوم لامعة */
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ffb6d5;
+            border-radius: 50%;
+            animation: sparkleAnim 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes sparkleAnim {
+            0%, 100% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 1;
+            }
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .hello-kitty-svg {
+            width: 280px;
+            height: 280px;
+            transition: transform 1.2s cubic-bezier(.7,-0.01,.3,1.01);
+            filter: drop-shadow(0 10px 25px rgba(255,105,180,0.3));
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .hello-kitty-svg.shrink-up {
+            transform: scale(0.5) translateY(-80px);
+            animation: none;
+        }
+        
+        .show-message-btn {
+            margin-top: 30px;
+            background: linear-gradient(135deg, #ff6fa5 0%, #ff3b7c 100%);
+            color: #fff;
+            border: 3px solid #000;
+            border-radius: 25px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 15px 45px;
+            box-shadow: 0 6px 0 #d91a4d, 0 10px 25px rgba(255,59,124,0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .show-message-btn:before {
+            content: '✨';
+            position: absolute;
+            left: 15px;
+            animation: rotate 2s linear infinite;
+        }
+        .show-message-btn:after {
+            content: '✨';
+            position: absolute;
+            right: 15px;
+            animation: rotate 2s linear infinite reverse;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .show-message-btn:hover {
+            background: linear-gradient(135deg, #ff8ab8 0%, #ff5291 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0 #d91a4d, 0 15px 30px rgba(255,59,124,0.5);
+        }
+        .show-message-btn:active {
+            background: #d91a4d;
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #d91a4d;
+        }
+        .msg {
+            display: none;
+            opacity: 0;
+            max-width: 90vw;
+            margin-top: 40px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(255, 59, 124, 0.25), 0 0 0 5px #ffb6d5;
+            padding: 25px 8vw;
+            color: #232946;
+            line-height: 2.2;
+            direction: ltr;
+            text-align: left;
+            unicode-bidi: plaintext;
+            transition: opacity 0.8s;
+            word-break: break-word;
+        }
+        .msg.visible {
+            opacity: 1;
+            animation: fadeInUp 1.2s;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 600px) {
+            .hello-kitty-svg { width: 200px; height: 200px; }
+            .msg { font-size: 0.95rem; padding: 15px 5vw; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="hello-kitty" id="kitty">
-            <div class="kitty-ear left"></div>
-            <div class="kitty-ear right"></div>
-            <div class="kitty-head"></div>
-            <div class="kitty-bow-center"></div>
-            <div class="kitty-bow-left"></div>
-            <div class="kitty-bow-right"></div>
-            <div class="kitty-eye left"></div>
-            <div class="kitty-eye right"></div>
-            <div class="kitty-nose"></div>
-            <div class="kitty-whisker l1"></div>
-            <div class="kitty-whisker l2"></div>
-            <div class="kitty-whisker l3"></div>
-            <div class="kitty-whisker r1"></div>
-            <div class="kitty-whisker r2"></div>
-            <div class="kitty-whisker r3"></div>
-            <div class="kitty-highlight"></div>
-        </div>
+        <svg class="hello-kitty-svg" id="kitty" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- الأذن اليسرى -->
+            <ellipse cx="95" cy="75" rx="32" ry="38" fill="#ffffff" stroke="#000000" stroke-width="4" transform="rotate(-15 95 75)"/>
+            
+            <!-- الأذن اليمنى -->
+            <ellipse cx="205" cy="75" rx="32" ry="38" fill="#ffffff" stroke="#000000" stroke-width="4" transform="rotate(15 205 75)"/>
+            
+            <!-- الرأس - شكل بيضاوي أفقي -->
+            <ellipse cx="150" cy="145" rx="95" ry="85" fill="#ffffff" stroke="#000000" stroke-width="4"/>
+            
+            <!-- القوس الأحمر - الجزء الأيسر -->
+            <ellipse cx="190" cy="75" rx="20" ry="22" fill="#ff1493" stroke="#000000" stroke-width="3" transform="rotate(-25 190 75)"/>
+            
+            <!-- القوس الأحمر - الجزء الأيمن -->
+            <ellipse cx="230" cy="75" rx="20" ry="22" fill="#ff1493" stroke="#000000" stroke-width="3" transform="rotate(25 230 75)"/>
+            
+            <!-- القوس الأحمر - المركز -->
+            <circle cx="210" cy="73" r="13" fill="#ff0066" stroke="#000000" stroke-width="3"/>
+            
+            <!-- العين اليسرى -->
+            <ellipse cx="125" cy="135" rx="7" ry="12" fill="#000000"/>
+            
+            <!-- العين اليمنى -->
+            <ellipse cx="175" cy="135" rx="7" ry="12" fill="#000000"/>
+            
+            <!-- الأنف -->
+            <ellipse cx="150" cy="160" rx="9" ry="7" fill="#ffcc00" stroke="#000000" stroke-width="2.5"/>
+            
+            <!-- الشوارب اليسرى -->
+            <line x1="70" y1="155" x2="115" y2="157" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="70" y1="165" x2="115" y2="165" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="70" y1="175" x2="115" y2="173" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+            
+            <!-- الشوارب اليمنى -->
+            <line x1="185" y1="157" x2="230" y2="155" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="185" y1="165" x2="230" y2="165" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="185" y1="173" x2="230" y2="175" stroke="#000000" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        
         <button class="show-message-btn" id="showMsgBtn">رسالة</button>
+        
         <div class="msg" id="msg">
             <p>
                 BNTY 3ID MILAD S3ID TNBGHIK ZIN DEYLI 39BA L 100 ANS BAX
@@ -298,12 +291,62 @@ body {
             </p>
         </div>
     </div>
+    
     <script>
         const kitty = document.getElementById('kitty');
         const msg = document.getElementById('msg');
         const btn = document.getElementById('showMsgBtn');
-        msg.style.display = "none";
-
+        
+        // إنشاء القلوب الطافية
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = ['💕', '💖', '💗', '💝', '💓'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 8000);
+        }
+        
+        // إنشاء الزهور المتساقطة
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'falling-flower';
+            flower.innerHTML = ['🌸', '🌺', '🌼', '🌻', '🌷', '🏵️'][Math.floor(Math.random() * 6)];
+            flower.style.left = Math.random() * 100 + '%';
+            flower.style.animationDelay = Math.random() * 3 + 's';
+            flower.style.animationDuration = (8 + Math.random() * 4) + 's';
+            document.body.appendChild(flower);
+            
+            setTimeout(() => flower.remove(), 12000);
+        }
+        
+        // إنشاء النجوم اللامعة
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 2000);
+        }
+        
+        // إنشاء القلوب والزهور بشكل دوري
+        setInterval(createHeart, 800);
+        setInterval(createFlower, 1200);
+        
+        // إضافة نجوم لامعة عند تحريك الماوس
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.85) {
+                createSparkle(e.clientX, e.clientY);
+            }
+        });
+        
+        // زر الرسالة
         btn.onclick = function() {
             kitty.classList.add('shrink-up');
             btn.style.display = "none";
