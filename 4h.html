@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> TNHBK</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap');
+
+body {
+    background: linear-gradient(135deg, #f9e0e9 0%, #fff7f0 100%);
+    font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* نجوم */
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 4s infinite alternate, floatStar 15s linear infinite;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes floatStar {
+    0% { transform: translateY(0); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* قلوب متحركة */
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+/* شريط التقدم */
+.progress-bar {
+    width: 95%;
+    max-width: 500px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff7fab, #d6a7ff);
+    border-radius: 10px;
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.page-indicator {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #ff7fab, #d6a7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* البطاقة */
+.card {
+    max-width: 600px;
+    line-height: 2;
+    font-size: 1.2rem;
+    background: #fff5fa;
+    color: #333;
+    padding: 22px 28px;
+    border-radius: 25px;
+    margin-bottom: 22px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    border: 2px solid #ffd6eb;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+h1 {
+    font-family: 'Montserrat', 'Cairo', Arial, sans-serif;
+    background: linear-gradient(90deg, #ff7fab, #d6a7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2rem;
+    margin-top: 15px;
+    text-align: center;
+}
+
+/* أزرار التنقل */
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    z-index: 3;
+}
+
+.side-btn {
+    background: linear-gradient(135deg, #ffc1d6, #e2b8ff);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(238,156,167,0.4);
+}
+
+.side-btn a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .card { font-size: 1rem; padding: 16px; }
+    .side-btn { width: 50px; height: 50px; font-size: 1.1rem; }
+    .buttons-container { gap: 15px; bottom: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- شريط التقدم -->
+<div class="progress-bar"><div class="progress"></div></div>
+<div class="page-indicator">📖 الصفحة 6 من 8</div>
+
+<h1>LHOBE</h1>
+
+<div class="card">
+bntyyy ana me3k ghadi nb9a me3k dimn ghadi ndir kolxi lik bnty
+ghadi n3mlk ahsn mo3amala o nkmlk kolchi bntyyy wakha m3k
+ghadi nb9a xd lik idik o n3etani bik ghadi nkon lik snd o mosa3id
+o ab o akh o 32ila o kolxi tnbghiiiik bnty
+</div>
+
+<!-- قلوب -->
+<div class="floating-heart" style="top:10%; left:5%;">💖</div>
+<div class="floating-heart" style="top:25%; left:90%; animation-delay: 1s;">🎂</div>
+<div class="floating-heart" style="top:80%; left:10%; animation-delay: 2s;">🎉</div>
+<div class="floating-heart" style="top:70%; left:85%; animation-delay: 3s;">💝</div>
+
+<!-- أزرار -->
+<div class="buttons-container">
+    <button class="side-btn"><a href="3h.html">⬅️</a></button>
+    <button class="side-btn"><a href="5h.html">➡️</a></button>
+</div>
+
+<script>
+// الصفحة الحالية
+const currentPage = 6;
+const totalPages = 8;
+const progress = document.querySelector('.progress');
+progress.style.width = (currentPage / totalPages) * 100 + "%";
+
+// نجوم
+function createStars() {
+    const starsCount = 25;
+    for (let i = 0; i < starsCount; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        const size = Math.random() * 2 + 1;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${left}%`;
+        star.style.bottom = `-10px`;
+        star.style.animationDelay = `${delay}s`;
+        document.body.appendChild(star);
+    }
+}
+window.addEventListener('load', createStars);
+</script>
+</body>
+</html>

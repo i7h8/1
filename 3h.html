@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRTY</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&family=Montserrat:wght@700&display=swap');
+
+body {
+    background: linear-gradient(135deg, #f9e0e9 0%, #fff7f0 100%);
+    font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* نجوم صغيرة */
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 4s infinite alternate, floatStar 15s linear infinite;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; transform: scale(0.7); }
+    to { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes floatStar {
+    0% { transform: translateY(0); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-120vh); opacity: 0; }
+}
+
+/* قلوب متحركة */
+.floating-heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+/* شريط التقدم */
+.progress-bar {
+    width: 95%;
+    max-width: 500px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    margin: 15px 0;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ff7fab, #d6a7ff);
+    border-radius: 10px;
+    width: 62.5%; /* الصفحة 5 من 8 = 62.5% */
+    transition: width 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* فقاعات */
+.card {
+    max-width: 600px;
+    line-height: 1.8;
+    font-size: 1.25rem;
+    background: #fff5fa;
+    color: #333;
+    padding: 18px 20px;
+    border-radius: 35px 35px 35px 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    margin: 12px 0;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid #ffd6eb;
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    background: linear-gradient(90deg, #ff7fab, #d6a7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    z-index: 3;
+}
+
+.side-btn {
+    background: linear-gradient(135deg, #ffc1d6, #e2b8ff);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 1.3rem;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.side-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(238,156,167,0.4);
+}
+
+.side-btn a {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .card { font-size: 0.95rem; padding: 14px 16px; }
+    .card-title { font-size: 1.1rem; }
+    .floating-heart { font-size: 1.6rem; }
+    .side-btn { width: 50px; height: 50px; font-size: 1.2rem; }
+    .buttons-container { gap: 15px; bottom: 20px; }
+    .progress-bar { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<h1>MOS9BAL</h1>
+
+<div class="progress-bar">
+    <div class="progress"></div>
+    صفحة 5 من 8
+</div>
+
+<div class="card">
+    <div class="card-title">MRTY</div>
+    most9bal howa whd haja li dimn knsm3oha mli hna skhr ohiya likn9we n9rwe
+    o xhal mn haja 3ela 9blo wlkin maxi dimn tykon most9bl howa lflos o dar
+    o sf la b3ed lmart tykon most9bal 3ibara 3ea xkhs bghi tzawaj mno ot3ix
+    me3h nty hiya most9bal deyli nty hiya lidyr 3eliha kolxi bla bik nty
+    mkyn hta haja bnty tnbghik o bgitk tkoni mrty
+</div>
+
+<div class="buttons-container">
+    <button class="side-btn"><a href="2h.html">⬅️</a></button>
+    <button class="side-btn"><a href="4h.html">➡️</a></button>
+</div>
+
+</body>
+</html>

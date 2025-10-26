@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Kitty Enhanced</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Hello Kitty - Enhanced Classic Style */
+body {
+    background: #fdfdfd; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Cairo', 'Montserrat', Arial, sans-serif;
+}
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.hello-kitty {
+    position: relative;
+    width: 200px; /* تعديل الحجم */
+    height: 190px;
+    margin-bottom: 25px;
+    z-index: 2;
+    transition: transform 1.2s cubic-bezier(.7,-0.01,.3,1.01), top 1.2s cubic-bezier(.7,-0.01,.3,1.01);
+    will-change: transform, top;
+}
+.hello-kitty.shrink-up {
+    transform: scale(0.45) translateY(-120px);
+}
+
+/* رأس هيلو كيتي - تحسين النسب */
+.kitty-head {
+    position: absolute;
+    width: 175px; /* عرض أدق */
+    height: 150px; /* ارتفاع أكبر قليلاً */
+    left: 10px;
+    top: 25px;
+    background: #fff;
+    border: 3.5px solid #000; /* سمك متوسط للخطوط */
+    border-radius: 48% 48% 48% 48% / 55% 55% 45% 45%; /* شكل أكثر استدارة */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* ظل ناعم جدًا */
+    z-index: 2;
+}
+
+/* الأذنان - زاوية أدق */
+.kitty-ear {
+    position: absolute;
+    width: 50px;
+    height: 55px;
+    background: #fff;
+    border: 3.5px solid #000;
+    border-bottom: none;
+    z-index: 1;
+}
+.kitty-ear.left {
+    left: 4px;
+    top: -4px;
+    border-radius: 60% 100% 0 0 / 100% 100% 0 0;
+    transform: rotate(-18deg); /* زاوية أكثر انحدارًا */
+}
+.kitty-ear.right {
+    right: 4px;
+    top: -4px;
+    border-radius: 100% 60% 0 0 / 100% 100% 0 0;
+    transform: rotate(18deg); /* زاوية أكثر انحدارًا */
+}
+
+/* القوس - ألوان زاهية وخطوط أدق */
+.kitty-bow-center {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    width: 22px;
+    height: 22px;
+    background: #ff3b7c; 
+    border: 2px solid #000; /* حدود أرق للقوس */
+    border-radius: 50%;
+    z-index: 4;
+}
+.kitty-bow-left, .kitty-bow-right {
+    position: absolute;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    background: #ff6fa5; 
+    border: 2px solid #000;
+    border-radius: 50%;
+    z-index: 3;
+}
+.kitty-bow-left {
+    right: 36px;
+    transform: rotate(-20deg); 
+}
+.kitty-bow-right {
+    right: -2px;
+    transform: rotate(20deg); 
+}
+
+/* العيون - موضع ونسبة أفضل */
+.kitty-eye {
+    position: absolute;
+    top: 75px;
+    width: 14px;
+    height: 19px;
+    background: #111;
+    border-radius: 50% / 60%;
+    z-index: 4;
+}
+.kitty-eye.left { left: 55px; } 
+.kitty-eye.right { left: 118px; } 
+
+/* الأنف - موضع ونسبة أفضل */
+.kitty-nose {
+    position: absolute;
+    top: 98px;
+    left: 88px;
+    width: 18px;
+    height: 12px;
+    background: #ffc900; 
+    border-radius: 50%;
+    border: 2px solid #000;
+    z-index: 4;
+}
+
+/* الشوارب - موضع وخطوط متناسقة */
+.kitty-whisker {
+    position: absolute;
+    width: 40px; 
+    height: 2px; /* أرق قليلاً */
+    background: #000;
+    border-radius: 2px;
+    z-index: 4;
+}
+.kitty-whisker.l1 { left: 10px; top: 102px; transform: rotate(-10deg);}
+.kitty-whisker.l2 { left: 8px; top: 116px; }
+.kitty-whisker.l3 { left: 10px; top: 130px; transform: rotate(10deg);}
+.kitty-whisker.r1 { left: 132px; top: 102px; transform: rotate(10deg);}
+.kitty-whisker.r2 { left: 134px; top: 116px; }
+.kitty-whisker.r3 { left: 132px; top: 130px; transform: rotate(-10deg);}
+
+/* لمعان بسيط على الرأس (لإبراز البياض) */
+.kitty-highlight {
+    display: none; 
+}
+
+/* زر و رسالة */
+.show-message-btn {
+    display: block;
+    margin: 0 auto;
+    margin-top: 25px;
+    background: #ff3b7c;
+    color: #fff;
+    border: 3px solid #000;
+    border-radius: 18px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 12px 38px;
+    box-shadow: 0 5px 0 #d91a4d;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    z-index: 2;
+    letter-spacing: 1px;
+}
+.show-message-btn:active {
+    background: #d91a4d;
+    transform: translateY(4px); 
+    box-shadow: 0 1px 0 #d91a4d;
+}
+.msg {
+    display: none;
+    opacity: 0;
+    max-width: 95vw;
+    margin: 0 auto;
+    margin-top: 35px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 12px rgba(255, 59, 124, 0.2), 0 0 0 4px #ffb6d5;
+    padding: 18px 10vw;
+    color: #232946;
+    line-height: 2.1;
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: plaintext;
+    transition: opacity 0.8s;
+    z-index: 1;
+    position: relative;
+    word-break: break-word;
+    pointer-events: none;
+}
+.msg.visible {
+    opacity: 1;
+    animation: fadeInUp 1.2s;
+    pointer-events: auto;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* للهاتف */
+@media (max-width: 600px) {
+    .hello-kitty { width: 120px; height: 110px; }
+    .kitty-head { width: 100px; height: 80px; left: 8px; top: 16px; border: 3px solid #000;}
+    .kitty-ear { width: 30px; height: 35px; border: 3px solid #000; }
+    .kitty-eye { width: 9px; height: 12px; top: 44px; }
+    .kitty-eye.left { left: 30px; }
+    .kitty-eye.right { left: 68px; }
+    .kitty-nose { width: 10px; height: 7px; left: 49px; top: 58px; border: 1.5px solid #000; }
+    .kitty-whisker { width: 22px; height: 1.5px; }
+    .kitty-bow-center { width: 12px; height: 12px; right: 8px; top: 5px; border: 2px solid #000; }
+    .kitty-bow-left, .kitty-bow-right { width: 16px; height: 16px; top: 2px; border: 2px solid #000; }
+    .kitty-bow-left { right: 30px; }
+    .msg { font-size: 0.95rem; padding: 10px 4vw; }
+    .show-message-btn { border: 2px solid #000; }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hello-kitty" id="kitty">
+            <div class="kitty-ear left"></div>
+            <div class="kitty-ear right"></div>
+            <div class="kitty-head"></div>
+            <div class="kitty-bow-center"></div>
+            <div class="kitty-bow-left"></div>
+            <div class="kitty-bow-right"></div>
+            <div class="kitty-eye left"></div>
+            <div class="kitty-eye right"></div>
+            <div class="kitty-nose"></div>
+            <div class="kitty-whisker l1"></div>
+            <div class="kitty-whisker l2"></div>
+            <div class="kitty-whisker l3"></div>
+            <div class="kitty-whisker r1"></div>
+            <div class="kitty-whisker r2"></div>
+            <div class="kitty-whisker r3"></div>
+            <div class="kitty-highlight"></div>
+        </div>
+        <button class="show-message-btn" id="showMsgBtn">رسالة</button>
+        <div class="msg" id="msg">
+            <p>
+                BNTY 3ID MILAD S3ID TNBGHIK ZIN DEYLI 39BA L 100 ANS BAX
+                MATMANITY O FRHA O GA3E DKXI LIKTMNY BNTY AHOWA 3ID MILD
+                KH
+                BNTY TNBGHIIIIK ZIN DEYLI KNMOOOT 3ELIK BNTY KNHM9 3ELIK
+                JAMAL DEYLK DRAFAT KOLK BNTY ZEWINA KNHM9 3ELIK BNTY💕
+                <br>
+                BNTY ANA DIMA M3K BNTY GHADI NB9A DIMN N3ETANI BIK BNTY BNTY
+                NT9RNINIX BHTA WHD O MT3MLINIX BHALHOM BNTY ANA MGHADIX NDIR
+                DKXI LIDARO HOMA OLA KIF TSRFO ME3K GHADI NTSARAF ME3K ANA
+                DIMN GHADI N3ETNI BIK O NDIHA FIK HIT NTY AGHLA HAJA 3NDI
+                BNTY KNMOOOT 3ELIK KBIDA DEYLI TNBGHIIIIIK ZIN DEYLI ANA
+                DIMN ME3K BNTY HTAJITY AYA HAJA AJI 3NDI MTKHBI 3ELIYA WALO
+                BAX MNT9L9X MNK ANA MGHADIX NKHBI 3ELIK WALO HAD L3AM GHADI
+                NHAWAL MN JHI KML N3ETNI BIK KTR O NDIHA FIK KTR OHTA NTY
+                BNTY HTAMI KTR O DIHA KTR BAX IKON TWAZON BNTY KNOOOOOOOOT
+                3ELIK BNTY ANA HADXI KNKB WALH ILA LYOUMA 20/09/2025 DABA
+                18:51 DABA NTY F LES COURS HDXI LITNDIR ANA FHYATY BNTY
+                KNDEWI ME3K ILA MKNTYX KNDIR XIHAJA BHAL HAKA OLA KNTFRJ
+                DABA NTY FAX GHADI TKONI KNT9RY M3RFTX KIFAX GHADI IKON DAK
+                LIL WALKIN LI3RF HIYA GHADI TKONI ME3AYA INCHA2ALH O GHADI
+                TKONI KT9RY HDXI TNBGHIIIIIK KBIDA DEYLI😘
+                <br>
+                BNTY ANA TNGHIR BAZAAAAF MKNBGHIX XIHAJA DEYLI TKON MOTAHA
+                LJMO3E KNGHI HAJA DEYLI NKHF 3ELIHA NHTM FIHA NDIHA FIHA O
+                NKHBIHA BNTY KNMOOOOT 3ELIK ZIN DEYLI KNMOOOOT 3ELIK BNTY
+                💖💖
+                <br>
+                BNTY ANA KNMOOOT 3ELIK BNTY BNTY ANA MAGHADIX NKHALIK BNTY
+                GHADI NB9A DIMN ME3K BNTY 3MRNI GHADI NKHONK OLA NKHLIK OLA
+                HTA HAJA BNTY BGHITK TSWELI RASK WAX 3MRK KHLITK FXIHJAA OLA
+                KHEWIT BIK OLA GLT LIK XIHJA O KNT GHAID KNKDB 3ELIK FIHA
+                DIMN KTJI 3NDI MKNGOLIKX LA KTGOLI LIYA XIHJA KNGOLK HIYA
+                LWELA BNTY KNBGHIK
+                <br>
+                BNTY SMHI LIYA SMHI LIYA BNTY 3ELA DKXI KML LIDR LIK BNTY O
+                M3JBK RAH MXI DRTHA BL3NI RAH KNKON KHRJ STITA3A DEYLI SMHI
+                LIYA BNTY KNMOOOT 3ELIK
+                GHADI NDIR GA3E LIFJHDI BAX N3MLK BNTY AHSN O3AMALA🥺
+                RAH ANA 3NDI GHIR NTY BOHDK BNTY BGHITK TFHMI HAD JOMLA MZYN
+                FAX XIHD KYNKON 3NDO GHIR XKHS WHD FHYTO HOWA KY3ENI LIH
+                KOLXI
+                <br>
+                BNTYYYYY KNBGHIIIIK ZIN DEYLI BNTY NCHA2ALH AHD L3AM NDAWZOH
+                HSN MN LIFAT O NKONO 9RB LB3EDIYTNA KTR O NTFHMO KTR BNTY
+                KNBGHIIIIK
+            </p>
+        </div>
+    </div>
+    <script>
+        const kitty = document.getElementById('kitty');
+        const msg = document.getElementById('msg');
+        const btn = document.getElementById('showMsgBtn');
+        msg.style.display = "none";
+
+        btn.onclick = function() {
+            kitty.classList.add('shrink-up');
+            btn.style.display = "none";
+            setTimeout(() => {
+                msg.style.display = "block";
+                setTimeout(() => {
+                    msg.classList.add('visible');
+                }, 50);
+            }, 1200);
+        };
+    </script>
+</body>
+</html>

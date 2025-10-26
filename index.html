@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🎉 Happy Birthday 🎉</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #0d0d1a, #1a1a2e 80%);
+      cursor: crosshair;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      z-index: 0;
+    }
+
+    .center-content {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      width: 90vw;
+      pointer-events: none;
+    }
+
+    h1 {
+      color: #ffd369;
+      font-family: 'Cairo', sans-serif;
+      font-size: 8vw;
+      text-shadow: 0 0 15px #ffb347, 0 0 25px #ffe8a3;
+      animation: glow 2s ease-in-out infinite alternate;
+      user-select: none;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ffb347, 0 0 20px #ffb347; }
+      to { text-shadow: 0 0 25px #fff176, 0 0 50px #ffb347; }
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 8vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 3;
+    }
+
+    button {
+      background: #22223b;
+      border: 2px solid #ffb347;
+      border-radius: 50px;
+      color: #ffb347;
+      font-size: 4vw;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+      padding: 3vh 8vw;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,179,71,0.3);
+      transition: all 0.3s ease;
+      pointer-events: auto;
+    }
+
+    button:hover {
+      background: #ffb347;
+      color: #1a1a2e;
+      box-shadow: 0 0 30px #ffb347;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* خاص لتناسب 720x1600 */
+    @media screen and (min-height: 1500px) {
+      h1 { font-size: 7vw; }
+      button { font-size: 4.2vw; padding: 3.5vh 10vw; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="birthday"></canvas>
+
+  <div class="center-content">
+    <h1>🎂 Happy Birthday 🎂</h1>
+  </div>
+
+  <div class="button-container">
+    <button><a href="h.html">🎁 WRKI BAX DOZI LSFHA JAYA 🎁</a></button>
+  </div>
+
+  <script>
+    const PI2 = Math.PI * 2;
+    const random = (min, max) => Math.random() * (max - min + 1) + min | 0;
+    const timestamp = () => new Date().getTime();
+
+    class Birthday {
+      constructor() {
+        this.resize();
+        this.fireworks = [];
+        this.counter = 0;
+      }
+
+      resize() {
+        this.width = canvas.width = window.innerWidth;
+        this.height = canvas.height = window.innerHeight;
+        this.spawnA = this.width / 4;
+        this.spawnB = this.width * 3 / 4;
+        this.spawnC = this.height * 0.1;
+        this.spawnD = this.height * 0.5;
+      }
+
+      onClick(evt) {
+        let x = evt.clientX || (evt.touches && evt.touches[0].pageX);
+        let y = evt.clientY || (evt.touches && evt.touches[0].pageY);
+        let count = random(3, 5);
+        for (let i = 0; i < count; i++) {
+          this.fireworks.push(new Firework(
+            random(this.spawnA, this.spawnB),
+            this.height,
+            x, y,
+            random(0, 360),
+            random(30, 110)
+          ));
+        }
+        this.counter = -1;
+      }
+
+      update(delta) {
+        ctx.globalCompositeOperation = 'hard-light';
+        ctx.fillStyle = `rgba(20, 20, 30, ${7 * delta})`;
+        ctx.fillRect(0, 0, this.width, this.height);
+        ctx.globalCompositeOperation = 'lighter';
+
+        for (let firework of this.fireworks) firework.update(delta);
+
+        this.counter += delta * 3;
+        if (this.counter >= 1) {
+          this.fireworks.push(new Firework(
+            random(this.spawnA, this.spawnB),
+            this.height,
+            random(0, this.width),
+            random(this.spawnC, this.spawnD),
+            random(0, 360),
+            random(30, 110)
+          ));
+          this.counter = 0;
+        }
+
+        if (this.fireworks.length > 500)
+          this.fireworks = this.fireworks.filter(f => !f.dead);
+      }
+    }
+
+    class Firework {
+      constructor(x, y, targetX, targetY, shade, offsprings) {
+        this.dead = false;
+        this.offsprings = offsprings;
+        this.x = x;
+        this.y = y;
+        this.targetX = targetX;
+        this.targetY = targetY;
+        this.shade = shade;
+        this.history = [];
+      }
+
+      update(delta) {
+        if (this.dead) return;
+
+        let xDiff = this.targetX - this.x;
+        let yDiff = this.targetY - this.y;
+
+        if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) {
+          this.x += xDiff * 2 * delta;
+          this.y += yDiff * 2 * delta;
+          this.history.push({ x: this.x, y: this.y });
+          if (this.history.length > 20) this.history.shift();
+        } else {
+          if (this.offsprings && !this.madeChilds) {
+            let babies = this.offsprings / 2;
+            for (let i = 0; i < babies; i++) {
+              let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies);
+              let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies);
+              birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0));
+            }
+          }
+          this.madeChilds = true;
+          this.history.shift();
+        }
+
+        if (this.history.length === 0) this.dead = true;
+        else if (this.offsprings) {
+          for (let i = 0; i < this.history.length; i++) {
+            let point = this.history[i];
+            ctx.beginPath();
+            ctx.fillStyle = `hsl(${this.shade},100%,${i * 5}%)`;
+            ctx.arc(point.x, point.y, 1.2, 0, PI2, false);
+            ctx.fill();
+          }
+        } else {
+          ctx.beginPath();
+          ctx.fillStyle = `hsl(${this.shade},100%,60%)`;
+          ctx.arc(this.x, this.y, 1.5, 0, PI2, false);
+          ctx.fill();
+        }
+      }
+    }
+
+    const canvas = document.getElementById('birthday');
+    const ctx = canvas.getContext('2d');
+    const birthday = new Birthday();
+    let then = timestamp();
+
+    window.onresize = () => birthday.resize();
+    document.onclick = e => birthday.onClick(e);
+    document.ontouchstart = e => birthday.onClick(e);
+
+    (function loop() {
+      requestAnimationFrame(loop);
+      let now = timestamp();
+      let delta = now - then;
+      then = now;
+      birthday.update(delta / 1000);
+    })();
+  </script>
+</body>
+</html>
